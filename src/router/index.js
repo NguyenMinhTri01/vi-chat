@@ -1,13 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
-
 Vue.use(VueRouter);
-
 const routes = [
   {
     path: "/",
-    name: "Home"
+    name: "Form",
+    component : () => import ('../views/forms')
+  },
+  {
+    path: "/room/:id",
+    name: "Room",
+    component : () => import ('../views/mainChat')
   }
 ];
 
