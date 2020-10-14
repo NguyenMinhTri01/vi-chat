@@ -21,7 +21,7 @@ Vue.component("fa", FontAwesomeIcon);
 // config socket.io
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: 'http://localhost:5000',
+  connection: 'https://vichat-be.herokuapp.com',
   vuex: {
       store,
       actionPrefix: 'socket_',
