@@ -7,19 +7,28 @@
 
 const state = {
   roomId : null,
-  roomPassword : null
+  roomPassword : null,
+  numberOfMember : 0,
+  authentication : true,
 };
 
 const mutations = {
   setRoomIdInState (state ,roomId) {
     state.roomId = roomId
   },
+  setRoomPasswordInState (state, roomPassword) {
+    state.roomPassword = roomPassword;
+  }
 };
 
 const actions = {
   storeSetRoomId({ commit } , roomId) {
     commit("setRoomIdInState" , roomId);
   },
+  storeSetRoomPassword ({commit}, roomPassword) {
+    commit("setRoomPasswordInState", roomPassword)
+  }
+
 };
 
 

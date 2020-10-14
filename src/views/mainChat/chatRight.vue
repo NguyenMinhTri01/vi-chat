@@ -7,18 +7,25 @@
         </div>
         <p class="text-header-right">Nguyễn Minh Trí</p>
       </div>
-      <div class="setting">
-        <fa :icon="['fas', 'cog']" />
+      <div  class="icon-option">
+        <div @click="modalSettingShow = true"  class="icon-item">
+          <fa :icon="['fas', 'cog']" />
+        </div>        
+
+        <div @click="modalSharingShow = true" class="icon-item">
+          <fa :icon="['fas', 'share-square']" />
+        </div>
+        <div @click="modalnotificationShow = !modalnotificationShow" id="icon-bell" class="icon-item">
+          <span class="number-notifi">2</span>
+          <fa :icon="['fas', 'bell']" />
+        </div>
       </div>
     </div>
     <div class="chat-body" >
       <ul class="list-massage">
-        <MsgSent :content="'Hello'" />
-        <MsgReceived :nameSender="'Hạ Như'" :content="'Hello'" :sameSender="false" />
-        <MsgReceived :nameSender="'Hạ Như'" :content="'Hello'" :sameSender="true" />
-        <MsgSent :content="'fsdssd dsadsa dsada'" />
-        <MsgSent :content="'fsdssd dsadsa dsada'" />
-        <MsgSent :content="'fsdssd dsadsa dsada'" />
+        <li><MsgSent :content="'Hello'" /></li>
+        <li><MsgReceived :nameSender="'Tri Minh'" :content="'Hello'" :sameSender="false" /></li>
+        <li><MsgReceived :nameSender="'Tri Minh'" :content="'Hello'" :sameSender="true" /></li>
       </ul>
     </div>
     <div class="chat-footer" >
@@ -29,32 +36,53 @@
         <fa :icon="['far', 'paper-plane']" />
       </div>
     </div>
+    <ModalSetting :modalShow="modalSettingShow" @eventHideModal="modalSettingShow = false" />
+    <ModalSharing :modalShow="modalSharingShow" @eventHideModal="modalSharingShow = false" />
+    <ModalNotification v-if="modalnotificationShow" />
   </div> 
 
 </template>
 
 <script>
-import MsgReceived from "./msgReceived";
-import MsgSent from "./msgSent";
+import MsgReceived from "../../components/message/msgReceived";
+import MsgSent from "../../components/message/msgSent";
+import ModalSetting from "../../components/modal/modalSetting";
+import ModalSharing from "../../components/modal/modalSharing";
+import ModalNotification from "../../components/modal/modalNotification";
 export default {
   components : {
     MsgReceived,
-    MsgSent
+    MsgSent,
+    ModalSetting,
+    ModalSharing,
+    ModalNotification
   },
 
   data () {
     return {
       mgsContent : '',
-      resize : false
+      modalSettingShow : false,
+      modalSharingShow : false,
+      modalnotificationShow : false
     }
+  },
+
+  computed :{
+
   },
 
   methods : {
     showChatLeft () {
+      this.modalnotificationShow = false
       this.$emit('eventShowChatLeft');
-    }
+    },
+  },
+
+  watch : {
+
   }
 }
+
 </script>
 
 <style scoped>
@@ -93,16 +121,46 @@ export default {
 .user-name {
   float: left;
   position: relative;
-  width: 90%;
+  width: 80%;
 }
 
-.setting {
+.icon-item {
   float: left;
-  width: 10%;
+  width: 33.333%;
   text-align: right;
-  font-size: 25px;
+  font-size: 22px;
   color: #007bff;
+  position: relative;
 }
+.icon-option {
+  width: 20%;
+  float: left;
+}
+
+.icon-item:hover {
+  color: #0518f7;
+}
+
+.number-notifi {
+  border-radius: 50%;
+  font-size: 10px;
+  background: red;
+  padding: 1px 3px 1px 3px;
+  position: relative;
+  color: white;
+  bottom: 14px;
+  left: 24px;
+  text-align: center;
+  font-family: inherit;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
 .chat-body {
   height: 78%;
   overflow-y: auto;
@@ -110,9 +168,7 @@ export default {
   box-sizing: border-box;
 }
 
-.chat-body-resize {
-  height: 78% !important;
-}
+
 
 .chat-footer {
   padding: 10px 10px 5px 10px;
@@ -122,9 +178,7 @@ export default {
   height: 12%;
   box-sizing: border-box;
 }
-.chat-footer-resize {
-  height: 15% !important;
-}
+
 
 .icon-reposive:hover {
   color:#696565
@@ -135,10 +189,6 @@ export default {
   margin: 0;
   padding: 0 5px 0 5px;
 }
-
- 
-
-
 
  /* input-message*/
 
@@ -185,10 +235,23 @@ export default {
 
 
 
-@media (max-width: 800px) {
-  .chat-footer {
-    border-radius: 0px;
-  }
+@media (max-width: 490px) {
+ .user-name {
+  width: 60%;
+}
+.icon-option {
+  width: 40%;
+}
+.text-header-right {
+  font-size: 1rem;
+}
+.icon-sent {
+  font-size: 1.2em;
+  width: 8%;
+}
+.input {
+  width: 92%;
+}
 
 }
 

@@ -1,10 +1,13 @@
 <template>
   <div class="col-lg-4 col-12 chat-left" :class="{ 'show-chatLeft': showLeft, 'hiden-chatLeft': hidenLeft }">
     <div class="header-left text-center">
-      <p class="text-header-left">Thành Viên Trong Phòng</p>
-        <div @click="hidenChatLeft" class="icon-reposive">
-          <fa :icon="['fas', 'chevron-left']" />
-        </div>
+      <div class="text-header-left">
+        <p>Số Lượng Thành Viên : 7 / 30</p>
+        <p>ID Phòng : <i>5555</i></p>
+      </div>
+      <div @click="hidenChatLeft" class="icon-reposive">
+        <fa :icon="['fas', 'chevron-left']" />
+      </div>
     </div>
     <div class="card-body contacts_body">
       <ul class="contact">
@@ -14,12 +17,27 @@
               <span class="m-2 icon-user">
                 <fa :icon="['fas', 'user']" />
               </span>
+              <div class="online"></div>
             </div>
             <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
+              <p style="margin:0; font-weight: bold;">vai trò thành viên và quản trị viên</p>
+              <i style="font-size:15px">Chủ Phòng</i>
             </div>
 
+          </div>
+        </li>
+        <li class="item">
+          <div class="card-item">
+            <div class="icon">
+              <span class="m-2 icon-user">
+                <fa :icon="['fas', 'user']" />
+              </span>
+              <div class="offline"></div>
+            </div>
+            <div class="info-user">
+              <p style="margin:0; font-weight: bold;">vai trò chủ phòng</p>
+              <i style="font-size:15px">Quản Trị Viên</i>
+            </div>
             <div class="option">
               <b-dropdown
                 size="sm"
@@ -30,15 +48,9 @@
                 <template v-slot:button-content>
                   <fa :icon="['fas', 'ellipsis-v']" />
                 </template>
-                <b-dropdown-item href="#">
-                  <fa :icon="['fas', 'user-slash']" /> Xóa Khỏi
-                  Phòng</b-dropdown-item
-                >
-                <b-dropdown-item href="#"
-                  >Đặt Làm Quản Trị Viên</b-dropdown-item
-                >
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
+                <b-dropdown-item >Đặt làm chủ phòng</b-dropdown-item>
+                <b-dropdown-item >Đặt làm thành viên</b-dropdown-item>
+                <b-dropdown-item >Xóa khỏi phòng</b-dropdown-item
                 >
               </b-dropdown>
             </div>
@@ -50,12 +62,27 @@
               <span class="m-2 icon-user">
                 <fa :icon="['fas', 'user']" />
               </span>
+              <div class="offline"></div>
             </div>
             <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
+              <p style="margin:0; font-weight: bold;">vai trò thành viên và quản trị viên</p>
+              <i style="font-size:15px">Quản Trị Viên</i>
             </div>
 
+          </div>
+        </li>
+        <li class="item">
+          <div class="card-item">
+            <div class="icon">
+              <span class="m-2 icon-user">
+                <fa :icon="['fas', 'user']" />
+              </span>
+              <div class="online"></div>
+            </div>
+            <div class="info-user">
+              <p style="margin:0; font-weight: bold;">vai trò chủ phòng</p>
+              <i style="font-size:15px">Thành viên</i>
+            </div>
             <div class="option">
               <b-dropdown
                 size="sm"
@@ -66,10 +93,9 @@
                 <template v-slot:button-content>
                   <fa :icon="['fas', 'ellipsis-v']" />
                 </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
+                <b-dropdown-item >Đặt làm chủ phòng</b-dropdown-item>
+                <b-dropdown-item >Đặt làm quản trị viên</b-dropdown-item>
+                <b-dropdown-item >Xóa khỏi phòng</b-dropdown-item
                 >
               </b-dropdown>
             </div>
@@ -81,12 +107,12 @@
               <span class="m-2 icon-user">
                 <fa :icon="['fas', 'user']" />
               </span>
+              <div class="online"></div>
             </div>
             <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
+              <p style="margin:0; font-weight: bold;">vai trò quản trị viên</p>
+              <i style="font-size:15px">Thành viên</i>
             </div>
-
             <div class="option">
               <b-dropdown
                 size="sm"
@@ -97,196 +123,7 @@
                 <template v-slot:button-content>
                   <fa :icon="['fas', 'ellipsis-v']" />
                 </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
-                >
-              </b-dropdown>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="card-item">
-            <div class="icon">
-              <span class="m-2 icon-user">
-                <fa :icon="['fas', 'user']" />
-              </span>
-            </div>
-            <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
-            </div>
-
-            <div class="option">
-              <b-dropdown
-                size="sm"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template v-slot:button-content>
-                  <fa :icon="['fas', 'ellipsis-v']" />
-                </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
-                >
-              </b-dropdown>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="card-item">
-            <div class="icon">
-              <span class="m-2 icon-user">
-                <fa :icon="['fas', 'user']" />
-              </span>
-            </div>
-            <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
-            </div>
-
-            <div class="option">
-              <b-dropdown
-                size="sm"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template v-slot:button-content>
-                  <fa :icon="['fas', 'ellipsis-v']" />
-                </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
-                >
-              </b-dropdown>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="card-item">
-            <div class="icon">
-              <span class="m-2 icon-user">
-                <fa :icon="['fas', 'user']" />
-              </span>
-            </div>
-            <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
-            </div>
-
-            <div class="option">
-              <b-dropdown
-                size="sm"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template v-slot:button-content>
-                  <fa :icon="['fas', 'ellipsis-v']" />
-                </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
-                >
-              </b-dropdown>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="card-item">
-            <div class="icon">
-              <span class="m-2 icon-user">
-                <fa :icon="['fas', 'user']" />
-              </span>
-            </div>
-            <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
-            </div>
-
-            <div class="option">
-              <b-dropdown
-                size="sm"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template v-slot:button-content>
-                  <fa :icon="['fas', 'ellipsis-v']" />
-                </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
-                >
-              </b-dropdown>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="card-item">
-            <div class="icon">
-              <span class="m-2 icon-user">
-                <fa :icon="['fas', 'user']" />
-              </span>
-            </div>
-            <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
-            </div>
-
-            <div class="option">
-              <b-dropdown
-                size="sm"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template v-slot:button-content>
-                  <fa :icon="['fas', 'ellipsis-v']" />
-                </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
-                >
-              </b-dropdown>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="card-item">
-            <div class="icon">
-              <span class="m-2 icon-user">
-                <fa :icon="['fas', 'user']" />
-              </span>
-            </div>
-            <div class="info-user">
-              <p style="margin:0; font-weight: bold;">Nguyễn Minh Trí</p>
-              <i style="font-size:15px">10 giờ 30 phút</i>
-            </div>
-
-            <div class="option">
-              <b-dropdown
-                size="sm"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template v-slot:button-content>
-                  <fa :icon="['fas', 'ellipsis-v']" />
-                </template>
-                <b-dropdown-item href="#">Action</b-dropdown-item>
-                <b-dropdown-item href="#">Another action</b-dropdown-item>
-                <b-dropdown-item href="#"
-                  >Something else here...</b-dropdown-item
+                <b-dropdown-item >Xóa khỏi phòng</b-dropdown-item
                 >
               </b-dropdown>
             </div>
@@ -338,6 +175,27 @@ export default {
   width: 15%;
   text-align: center;
   float: left;
+  padding: 0;
+}
+.online {
+  position: relative;
+  height: 13px;
+  width: 13px;
+  background-color: #5ee85e;
+  border-radius: 50%;
+  bottom: 20px;
+  left: 33px;
+  border: 2px solid white ;
+}
+.offline {
+  position: relative;
+  height: 13px;
+  width: 13px;
+  background-color: #6c757d;
+  border-radius: 50%;
+  bottom: 20px;
+  left: 33px;
+  border: 2px solid white ;
 }
 .info-user {
   position: relative;
@@ -347,7 +205,7 @@ export default {
   font-size: 16px;
 }
 .icon-user {
-  font-size: 35px;
+  font-size: 33px;
   color: #39ace7;
 }
 
@@ -358,6 +216,8 @@ export default {
   padding: 5px;
   position: relative;
 }
+
+
 
 .contact {
   list-style: none;
@@ -370,6 +230,7 @@ export default {
   padding: 0;
   border-right: 1px solid #cccccc;
   height: 100%;
+  width: 100%;
 }
 
 .contacts_body {
@@ -380,20 +241,25 @@ export default {
 }
 
 .header-left {
-  padding: 10px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px 0 0 0;
   border-bottom: 1px solid #cccccc;
   height: 10%;
+  box-sizing: border-box;
 }
 
 .text-header-left {
-  font-size: 1.6rem;
+  font-size: 1rem;
   color: #39ace7;
   font-family: inherit;
+  font-weight: bold;
+}
+.text-header-left p {
   margin-bottom: 0 !important;
 }
+
 
 .icon-reposive {
   width: 3%;
@@ -411,10 +277,10 @@ export default {
 
   @keyframes showLeft-chat {
     from {right: 100%;}
-    to {right: 15%;}
+    to {right: 0%;}
   }
   @keyframes hidenLeft-chat {
-    from {right: 15%;}
+    from {right: 0%;}
     to {
       right: 100%;
       display: none;
@@ -433,7 +299,7 @@ export default {
     height: 8%;
   }
   .text-header-left {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     width: 97%;
     float: left;
   }
@@ -451,11 +317,11 @@ export default {
     border-right: 0px;
     z-index: 1;
     background-color: rgba(255, 255, 255);
-    width: 85%;
+    width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    right: 85%;
+    right: 100%;
     animation-name: showLeft-chat;
-    animation-duration: 1s;
+    animation-duration: 0.8s;
     animation-fill-mode: forwards;  
   }
   .hiden-chatLeft {
@@ -465,11 +331,11 @@ export default {
     border-right: 0px;
     z-index: 1;
     background-color: rgba(255, 255, 255);
-    width: 85%;
+    width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    right: 85%;
+    right: 100%;
     animation-name: hidenLeft-chat;
-    animation-duration: 1s;
+    animation-duration: 0.8s;
     animation-fill-mode: forwards;  
   }
   .item:hover {

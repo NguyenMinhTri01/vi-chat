@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import VueSocketIO from 'vue-socket.io'
 
 // Install BootstrapVue
 import { BootstrapVue } from "bootstrap-vue";
@@ -15,8 +16,18 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-library.add(fas , far, fab);
+library.add(fas, far, fab);
 Vue.component("fa", FontAwesomeIcon);
+// config socket.io
+Vue.use(new VueSocketIO({
+  debug: false,
+  connection: 'http://localhost:5000',
+  vuex: {
+      store,
+      actionPrefix: 'socket_',
+      mutationPrefix: 'SOCKET_'
+  }
+}))
 
 Vue.config.productionTip = false;
 

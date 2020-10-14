@@ -3,7 +3,13 @@
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  created () {
+   
+  }
+}
+</script>
 <style>
 body, html {
   height: 100%;
@@ -11,8 +17,8 @@ body, html {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 3px;
+  height: 3px;
 }
 
 /* Track */

@@ -1,46 +1,86 @@
 <template>
-  <div class="wrapper fadeInDown">
-    <div id="formContent">
-      <div class="fadeIn first">
-        <h2 class="mt-3 logo"><fa :icon="['fas', 'sms']" /> Vi Chat</h2>
-      </div>
-      <FormInfoUser
-        @eventCreateRoom="handleEventCreateRoom"
-        @eventShowFormFindRoom="handlEventShowFormFindRoom"
-        v-if="activeFormInfoUser"
-      />
-      <FormFindRoom v-if="activeFormFindRoom" />
-      <div id="formFooter">
-        <a class="underlineHover" href="#">Vi-chat</a>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <div class="fadeIn first">
+          <h2 class="mt-3 logo"><fa :icon="['fas', 'sms']" /> Vi Chat</h2>
+        </div>
+        <div :class="{'form-hiden' : loading}">
+          <FormInfoUser
+            @eventShowFormCreateRoom="handleEventShowFormCreateRoom"
+            @eventShowFormFindRoom="handlEventShowFormFindRoom"
+            v-if="activeFormInfoUser"
+          />
+          <FormCreateRoom v-if="activeFormCreateRoom" />
+          <FormFindRoom v-if="activeFormFindRoom" />
+        </div>
+        <Loading_V1 v-if="loading" />
+        <div v-if="(activeFormCreateRoom || activeFormFindRoom) && !loading " id="formFooter" class="fadeInDown">
+          <span @click="handleEventShowFormInfoUser" class="underlineHover">Quay Lại</span>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import FormInfoUser from "./formInfoUser";
 import FormFindRoom from "./formFindRoom";
+import FormCreateRoom from "./formCreateRoom";
+import Loading_V1 from "../../components/loading/loading_V1";
 export default {
   components: {
     FormInfoUser,
-    FormFindRoom
+    FormFindRoom,
+    FormCreateRoom,
+    Loading_V1
+  },
+  beforeCreate () {
+    this.$store.dispatch("patchAddSocketIdForUser");
+  },
+  created () {
+    this.$store.dispatch("TryToAutoJoinRoom");
   },
 
   data() {
     return {
       activeFormInfoUser: true,
-      activeFormFindRoom: false
+      activeFormFindRoom: false,
+      activeFormCreateRoom : false
     };
+  },
+  computed : {
+    loading() {
+      return this.$store.state.user.loading;
+    },
+    roomId() {
+      return this.$store.state.room.roomId;
+    }
+  },
+  watch : {
+    roomId (value) {
+      if (value) {
+        this.$router.push(`/room/${value}`);
+      }
+    }
   },
 
   methods : {
-    handleEventCreateRoom () {
-
+    handleEventShowFormInfoUser() {
+      this.activeFormCreateRoom = false;
+      this.activeFormFindRoom = false;
+      this.activeFormInfoUser = true;
     },
-
+    handleEventCreateRoom () {
+      
+    },
     handlEventShowFormFindRoom () {
       this.activeFormInfoUser = false;
+      this.activeFormCreateRoom = false;
       this.activeFormFindRoom = true;
+    },
+    handleEventShowFormCreateRoom () {
+      this.activeFormInfoUser = false;
+      this.activeFormFindRoom = false;      
+      this.activeFormCreateRoom = true;
     }
 
   }
@@ -58,6 +98,10 @@ a {
 .logo {
   color: #39ace7;
 }
+.form-hiden {
+  display: none !important;
+  visibility: hidden !important;
+} 
 
 .class-h2 {
   text-align: center;
@@ -159,7 +203,7 @@ h2.active {
 
 
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -170,21 +214,21 @@ input[type="text"] {
   font-size: 16px;
   width: 100%;
   border: 2px solid #f6f6f6;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,input[type="password"]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type="text"]:placeholder {
+input[type="text"]::placeholder, input[type="password"]::placeholder {
   color: #cccccc;
 }
 
@@ -301,7 +345,12 @@ input[type="text"]:placeholder {
   background-color: #56baed;
   content: "";
   transition: width 0.2s;
+
 }
+.underlineHover {
+  cursor: pointer;
+}
+
 
 .underlineHover:hover {
   color: #0d0d0d;

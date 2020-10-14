@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent class="mb-3">
     <input
       v-model="name"
       type="text"
@@ -11,7 +11,10 @@
       autocomplete="off"
     />
     <div class="btn-option">
-      <button @click="createRoom" class="btn-create-room fadeIn fourth mb-3">
+      <button
+        @click="showFormCreateRoom"
+        class="btn-create-room fadeIn fourth mb-3"
+      >
         Tạo Phòng
       </button>
       <button
@@ -29,12 +32,12 @@ export default {
   data() {
     return {
       err: false,
-      name: "",
+      name: this.$store.state.user.name || "",
       placeholderInputName: "Nhập Tên Của Bạn"
     };
   },
-  created () {
-    this.name = localStorage.name
+  created() {
+    this.name = localStorage.name;
   },
   methods: {
     validateInputName() {
@@ -49,20 +52,38 @@ export default {
     createRoom() {
       this.$emit("eventCreateRoom");
     },
+    setUpUser() {
+      if (!this.userId) {
+        this.$store.dispatch("postCreateUser");
+      } else{
+        this.$store.dispatch("patchAddSocketIdForUser");
+      }
+    },
     showFormFindRoom() {
       if (this.validateInputName()) {
-        this.$store.dispatch("storeSetName", this.name);
-        localStorage.name = this.name;
+        ///
         this.$emit("eventShowFormFindRoom");
       }
+    },
+    showFormCreateRoom() {
+      if (this.validateInputName()) {
+        this.$store.dispatch("storeSetName", this.name);
+        this.setUpUser();
+        this.$emit("eventShowFormCreateRoom");
+      }
     }
+  },
+  computed : {
+    userId () {
+      return this.$store.state.user.userId;
+    },
   },
 
   watch: {
     name(value) {
       if (value && this.err) {
         this.err = false;
-        this.placeholderInputName = "Nhập Tên Của Bạn"
+        this.placeholderInputName = "Nhập Tên Của Bạn";
       }
     }
   }

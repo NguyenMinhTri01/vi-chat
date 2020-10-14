@@ -1,5 +1,5 @@
 <template>
-  <li :class="{again : sameSender}" class="message-received">
+  <div :class="{again : sameSender}" class="message-received">
     <div class="name-sender">
       <span v-if='!sameSender' >{{nameSender}}</span>
     </div>
@@ -7,8 +7,9 @@
       <span
         >{{content}}</span
       >
+      <span class="tooltiptext">Hôm Nay 10:30</span>
     </div>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -26,12 +27,40 @@ export default {
   color: black;
   max-width: 70%;
   font-family: inherit;
-  display: inline-block;;
+  display: inline-block;
+  position: relative;
+  /* font-size: 18px; */
 }
 .message-received {
   margin: 15px 3px 5px 3px;
   position: relative;
 }
+
+.content-received .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(0, 0, 0, .30);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  opacity: 0;
+  transition: opacity 2s;
+  font-size: 0.8rem;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -1px;
+  left: 105%;
+}
+
+.content-received:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 .again {
   margin-top: 0 !important;
 }
